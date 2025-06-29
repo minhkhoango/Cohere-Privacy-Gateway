@@ -1,0 +1,28 @@
+{
+    "family": "cohere-poc-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256", "memory": "512",
+    "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/CohereECSTaskExecRole",
+    "taskRoleArn":      "arn:aws:iam::<ACCOUNT_ID>:role/CohereTaskRole",
+    "containerDefinitions": [
+        {
+            "name": "cohere-privacy-gateway",
+            "image": "684160548083.dkr.ecr.us-east-1.amazonaws.com/cohere-poc:latest",
+            "portMappings": [{"containerPort": 80, "protocol": "tcp"}],
+            "essential": true,
+            "environment": [
+                {"name": "SECRET_NAME", "value": "CohereApiKeyV1"},
+                {"name": "AWS_REGION", "value": "us-east-1"}
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/cohere-poc",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ]
+}

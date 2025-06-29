@@ -1,0 +1,14 @@
+{
+    "cluster": "cohere-poc-cluster",
+    "serviceName": "cohere-poc-service",
+    "taskDefinition": "cohere-poc-task",
+    "desiredCount": 1,
+    "launchType": "FARGATE",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": ["subnet-0c7deb948250bcb71"], 
+            "securityGroups": ["sg-00269d7940793ebb6"],
+            "assignPublicIp": "DISABLED"
+        }
+    }
+}
